@@ -24,6 +24,10 @@ $(call inherit-product-if-exists, vendor/intel/moorefield/prebuilts/houdini/houd
 PRODUCT_AAPT_CONFIG := normal large xlarge hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
+## APEX
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/ld.config.txt:$(TARGET_COPY_OUT_SYSTEM)/etc/swcodec/ld.config.txt
+
 ## Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
@@ -91,7 +95,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.composer@2.1-impl \
-    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.mapper@2.0-impl-2.1 \
     IMG_graphics \
     hwcomposer.moorefield \
     libion
@@ -210,12 +214,12 @@ PRODUCT_PACKAGES += \
 
 ## Ramdisk
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/fstab.fugu:root/fstab.fugu \
-    $(LOCAL_PATH)/rootdir/init.fugu.rc:root/init.fugu.rc \
+    $(LOCAL_PATH)/rootdir/fstab.fugu:$(TARGET_OUT_VENDOR)/etcfstab.fugu \
+    $(LOCAL_PATH)/rootdir/init.fugu.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.fugu.rc \
     $(LOCAL_PATH)/rootdir/init.fugu.countrycode.sh:system/bin/init.fugu.countrycode.sh \
-    $(LOCAL_PATH)/rootdir/init.fugu.usb.rc:root/init.fugu.usb.rc \
-    $(LOCAL_PATH)/rootdir/ueventd.fugu.rc:root/ueventd.fugu.rc \
-    $(LOCAL_PATH)/recovery/root/init.recovery.fugu.rc:root/init.recovery.fugu.rc
+    $(LOCAL_PATH)/rootdir/init.fugu.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.fugu.usb.rc \
+    $(LOCAL_PATH)/rootdir/ueventd.fugu.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
+    $(LOCAL_PATH)/recovery/root/init.recovery.fugu.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.recovery.fugu.rc
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_COPY_FILES += \
@@ -279,7 +283,7 @@ PRODUCT_PACKAGES += \
 
 ## Wi-Fi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service \
+    android.hardware.wifi@1.0-service-legacy \
     bcmdhd.cal \
     bcmdhd_sr2.cal \
     hostapd \

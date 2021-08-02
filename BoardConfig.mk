@@ -55,6 +55,7 @@ TARGET_BOOTLOADER_IS_2ND := true
 DONT_DEXPREOPT_PREBUILTS := true
 # Don't uncompress dex files in priv apps APKs to save on space.
 DONT_UNCOMPRESS_PRIV_APPS_DEXS := true
+WITH_DEXPREOPT_DEBUG_INFO := false
 
 ## DRM Protected Video
 BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 1
@@ -105,7 +106,7 @@ BOARD_KERNEL_CMDLINE += earlyprintk=nologger loglevel=8
 BOARD_KERNEL_CMDLINE += androidboot.hardware=fugu androidboot.serialno=01234567890123456789
 BOARD_KERNEL_CMDLINE += snd_pcm.maximum_substreams=8
 BOARD_KERNEL_CMDLINE += intel_soc_pmu.enable_s3=0
-BOARD_KERNEL_CMDLINE += loop.max_part=7
+BOARD_KERNEL_CMDLINE += loop.max_part=7 androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := bzImage
 TARGET_KERNEL_ARCH := x86_64
 TARGET_KERNEL_CONFIG := lineage_fugu_defconfig
@@ -132,6 +133,7 @@ TARGET_HAS_ISV := true
 ## Partitions
 BOARD_FLASH_BLOCK_SIZE := 2048
 BOARD_CACHEIMAGE_PARTITION_SIZE := 260014080
+BOARD_ROOT_EXTRA_FOLDERS := factory logs
 # As of 3562118, inode usage was 2149, use 4096 to be safe
 BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := 4096
 BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
